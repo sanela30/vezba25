@@ -17,16 +17,31 @@ namespace vezba25
                 Console.Clear();
                 Console.WriteLine("QA telefonski imenik \n");
                 Console.WriteLine("1.Unos novog imena");
-                Console.WriteLine("2.Unos novog imena");
+                Console.WriteLine("2.Listanje imena");
                 Console.WriteLine("3.Pretraga");
                 Console.WriteLine("Q.Kraj rada");
                 choice = Console.ReadLine();
 
-
-                if (choice == "1")
+                switch (choice)
                 {
-                    AddNewName();
+                    case "1":
+                        AddNewName();
+                        break;
+                    case "2":
+                        ListNames();
+                        break;
+                    case "3":
+                        SearchForName();
+                        break;
+                    case "Q":
+                        
+                        break;
+                    default:
+                        break;
                 }
+                
+
+              
 
             } while (choice.ToUpper() != "Q");
 
@@ -55,6 +70,48 @@ namespace vezba25
 
 
             } while (choice.ToUpper() == "Yes");
+        }
+
+        static void ListNames()
+        {
+            Console.Clear();
+            DispayNames(FileMenagment.Read());
+           
+            
+        }
+
+        static void SearchForName()
+        {
+            string search;
+            Console.Write("Unesite termin za pretragu(mora da sadrzi najmanje 3 slova)>");
+            search = Console.ReadLine();
+            if ((search == "")|| (search.Length<3))
+            {
+                return;
+            }
+            List<string> searchResults = new List<string>();
+            List<string> listOFnames =FileMenagment.Read();
+            foreach(string name in listOFnames)
+            {
+                if (name.ToUpper().Contains(search.ToUpper()))
+                {
+                    searchResults.Add(name);
+                }
+            }
+            DispayNames(searchResults);
+        }
+        static void DispayNames(List<string> listOFNames)
+        {
+            Console.WriteLine("Ime\tPrezime\t\tTelefon\t\t\tAdresa");
+            Console.WriteLine("--------------------------------------------");
+
+            foreach (string name in listOFNames)
+            {
+                string[] details;  
+                details = name.Split(';');
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}\t", details[0], details[1], details[3], details[2]);
+            }
+            Console.ReadKey();
         }
     }
 }

@@ -15,5 +15,22 @@ namespace vezba25
                 fileHandle.WriteLine("{0};{1};{2};{3}",firstName,lastName,address,phone);
             }
         }
+
+        public static List<string>Read()
+        {
+            List<string> listOfNames = new List<string>();
+
+            using (StreamReader fileHandle = new StreamReader(fileName))
+            {
+                string fileContents = "";
+                while((fileContents = fileHandle.ReadLine()) != null)
+                {
+                    listOfNames.Add(fileContents);
+                }
+
+            }
+
+            return listOfNames;
+        }
     }
 }
