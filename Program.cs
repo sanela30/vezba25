@@ -47,6 +47,8 @@ namespace vezba25
                 Console.Write("Unseite telefon>");
                 phone = Console.ReadLine();
 
+                FileMenagment.Store(firstName,lastName,address,phone);
+
                 Console.WriteLine("\n Da li zelite unos novog imena?Ukoliko zelite otkucajte slovo 'Y',ili ENTER ukoliko zelite prekinete");
                 choice = Console.ReadLine();
                 Console.WriteLine("");
